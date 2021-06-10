@@ -2,6 +2,14 @@ import $ from 'jquery';
 
 window.listaCompras = [];
 
+if (localStorage.getItem('listaCompras')) {
+  window.listaCompras = JSON.parse(localStorage.getItem('listaCompras'));
+
+  window.listaCompras.forEach((compra) => {
+    $('ol').append('<li>' + compra + '</li>');
+  });
+}
+
 $('#button').click(function () {
   var toAdd = $('input[name=itemCompras]').val();
   $('ol').append('<li>' + toAdd + '</li>');

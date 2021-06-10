@@ -16,6 +16,9 @@ beforeAll(() => {
     <ol></ol>
   </div>
     `;
+
+  const initialStuff = ['DesdeElInicio'];
+  window.localStorage.setItem('listaCompras', JSON.stringify(initialStuff));
   require('./index');
 });
 
@@ -99,4 +102,12 @@ it('index.js al presionar el div id="button" se guarda el valor del input en la 
 
   expect(window.listaCompras.includes('5')).toBe(true);
   expect(window.localStorage.getItem('listaCompras').includes('5')).toBe(true);
+});
+
+it('index.js carga los datos del almacenamiento local al iniciar la app | Asegúrate que al iniciar/refrescar la app, index.js lea de localStorage i coloque los items existentes dentro del ol', () => {
+  expect($('li:contains("DesdeElInicio")')).not.toBeNull();
+  expect(window.listaCompras.includes('DesdeElInicio')).toBe(true);
+  expect(
+    window.localStorage.getItem('listaCompras').includes('DesdeElInicio')
+  ).toBe(true);
 });
